@@ -2,3 +2,4 @@ io.spicelabs.components.testing.MockComponent
 io.spicelabs.components.testing.GoodClass
 io.spicelabs.components.testing.BadVersionClass
 io.spicelabs.components.testing.LoggingClass
+io.spicelabs.components.testing.FooReporterComponent
