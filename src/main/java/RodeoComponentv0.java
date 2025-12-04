@@ -7,6 +7,7 @@ public interface RodeoComponentv0 {
   Version getComponentVersion();
   void exportAPIFactories(APIFactoryReceiver receiver);
   void importAPIFactories(APIFactorySource factorySource);
+  void onLoadingComplete();
   void shutDown();
 }
 

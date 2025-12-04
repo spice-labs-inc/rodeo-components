@@ -18,6 +18,8 @@ class MockComponent extends RodeoComponent {
     override def importAPIFactories(factorySource: APIFactorySource): Unit = { }
     override def shutDown(): Unit = { }
     override def getComponentVersion(): Version = Version.parse("0.0.0")
+
+    override def onLoadingComplete(): Unit = { }
     override def getIdentity(): RodeoIdentity = MockIdentity("Mock Component")
 }
 
