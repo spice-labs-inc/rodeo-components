@@ -27,7 +27,7 @@ class MockLogger(report: (String, String) => Unit) extends RodeoLogger {
 
 class MockLoggerFactory(ml: MockLogger) extends APIFactory[RodeoLogger] {
     override def name(): String = "MockLogger"
-    override def buildAPI(): RodeoLogger = ml
+    override def buildAPI(subscriber: RodeoComponent): RodeoLogger = ml
 }
 
 class LoggingClass extends MockComponent {
@@ -70,7 +70,7 @@ class LoggingTest  extends munit.FunSuite {
 
         val loggerFactoryOpt = loader.getAPIFactory[RodeoLogger]("MockLogger", null, classOf[RodeoLogger])
         val loggerFactory = loggerFactoryOpt.get()
-        val logger = loggerFactory.buildAPI()
+        val logger = loggerFactory.buildAPI(loggerComponent)
 
         logger.debug("foo")
         assertEquals(loggerComponent.lastLevel, "debug")

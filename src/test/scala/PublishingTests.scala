@@ -9,6 +9,7 @@ import io.spicelabs.rodeocomponents.RodeoEnvironment
 import scala.compiletime.ops.double
 import io.spicelabs.rodeocomponents.APIFactorySource
 import scala.jdk.OptionConverters._
+import io.spicelabs.rodeocomponents.RodeoComponent
 
 trait Reporter extends API {
     def report(message: String): Unit
@@ -23,7 +24,7 @@ class FooReporter(reportFunc: (String) => Unit) extends Reporter {
 
 class FooReporterFactory(fr: FooReporter) extends APIFactory[Reporter] {
     override def name(): String = "foo-reporter"
-    override def buildAPI(): Reporter = fr
+    override def buildAPI(subscriber: RodeoComponent): Reporter = fr
 }
 
 trait Worker extends API {
@@ -40,7 +41,7 @@ class FooWorker extends Worker {
 
 class FooWorkerFactory(fw: FooWorker) extends APIFactory[Worker] {
     override def name(): String = "foo-worker"
-    override def buildAPI(): Worker = fw
+    override def buildAPI(subscriber: RodeoComponent): Worker = fw
 }
 
 class FooReporterComponent extends MockComponent {
@@ -61,7 +62,7 @@ class FooReporterComponent extends MockComponent {
     override def importAPIFactories(factorySource: APIFactorySource): Unit = {
         val reporterFactory = factorySource.getAPIFactory[Reporter]("Reporter", this, classOf[Reporter]).toScala
         if (reporterFactory.isDefined) {
-            worker.reporter = Some(reporterFactory.get.buildAPI())
+            worker.reporter = Some(reporterFactory.get.buildAPI(this))
         }
     }
 }
@@ -85,7 +86,7 @@ class PublishingTests extends munit.FunSuite {
 
         val workerFactoryOpt = loader.getAPIFactory[Worker]("Worker", null, classOf[Worker])
         val workerFactory = workerFactoryOpt.get()
-        val localWorker = workerFactory.buildAPI()
+        val localWorker = workerFactory.buildAPI(fooReporterComponent)
 
         localWorker.work()
 
