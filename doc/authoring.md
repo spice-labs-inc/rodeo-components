@@ -164,10 +164,26 @@ Here is a simple example that demonstrates that:
 
 ```java
 public class MyComponent extends RodeoComponent {
-  public void exportAPIFactories(APIFactory receiver) {
+  public void exportAPIFactories(APIFactoryReceiver receiver) {
     MyGreeterFactory factory = MyGreeterFactory();
     // Note: the class that gets passed in is the class of the API interface NOT the factory
     receiver.publishFactory(this, factory.name(), factory, MyGreeter.class);
   }
 }
 ```
+
+In a real-world situation, however, a Component should track each `APIFactory` and each `API` that has been built. This way, if a Component has a failure, it can deactivate the factories and the APIs so that no damage will result.
+
+### Cleaning Up
+
+There are several forms of clean-up that may happen in the lifetime of a Component:
+
+- Short-term clean-up
+- Failure clean-up
+- End-of-life clean-up
+
+Short-term clean-up is when a resource, such as an API, has been acquired and can be released after processing is complete. Short-term, in this case, means over the span of a single call. To clean up under these circumstances is either the choice of the Component author or may be dictated by the resource itself.
+
+Failure is when in the course of events, an error has occurred from which the Component can't recover. Under these circumstances, the Component is responsible for not only cleaning up, but ensuring that if the Component has exported API factories that neither the factories nor any APIs will cause damage. Under these circumstances, the Component should call release on each API is has imported.
+
+When a Goat Rodeo completes, it will call the `shutDown` method of every Component. At this time, the Component should call `release` on every API that it has acquired. Since the order of calling `shutDown` is undefined, a Component should be prepared to gracefully handle `release` calls to APIs that it has published even after `shutDown` has been called. There is one exception to this, since the `RodeoLogger` API is the only provided mechanism for Components to generate information, every Component can safely assume that the once acquired, the logging API will always be available to other Components.
