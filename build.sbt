@@ -16,7 +16,7 @@ ThisBuild / homepage := _homepage
 ThisBuild / scmInfo := Some (
   ScmInfo(
     url("https://github.com/spice-labs-inc/rodeo-components"),
-    "scm:git@github.com:spice-labs-inc/cilantro.git"
+    "scm:git@github.com:spice-labs-inc/rodeo-components.git"
   )
 )
 
@@ -30,11 +30,46 @@ ThisBuild / developers := List(
   )
 )
 
+val _mavenCentral = "maven-central"
+val _isMavenCentralPublish = sys.env.getOrElse("PUBLISHING_DESTINATION", _mavenCentral) == _mavenCentral
+val repo = "https://maven.pkg.github.com/spice-labs-inc/rodeo-components"
+val githubResolver = Some("GitHub Package Registry" at repo)
+
+ThisBuild / publishTo := {
+  val log = sLog.value
+  if (_isMavenCentralPublish) {
+    log.info("setting publishTo to localStaging")
+    localStaging.value
+  } else {
+    log.info("setting publishTo to githubResolver")
+    githubResolver
+  }
+}
+
+credentials += Credentials(
+  "GitHub Package Registry",
+  "maven.pkg.github.com",
+  "x-access-token",
+  sys.env.getOrElse("GITHUB_TOKEN", "")
+)
+
+// make the PGP_PASSPHRASE available
+ThisBuild / pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toCharArray)
+Global / excludeLintKeys += pgpPassphrase
+
+Compile / packageBin := (Compile /  packageBin).value
+
+publishMavenStyle := true
+
+
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "goat-components",
-    version := "0.1.0-SNAPSHOT",
+    name := "rodeo-components",
+
+    organization := "io.spicelabs",
+
+    version := version.value,
 
     scalaVersion := scala3Version,
 
