@@ -4,7 +4,7 @@ import io.spicelabs.rodeocomponents.*
 
 import java.lang.Runtime.Version
 import java.util.ServiceLoader
-import io.spicelabs.rodeocomponents.APIS.RodeoLogger
+import io.spicelabs.rodeocomponents.APIS.logging.RodeoLogger
 
 class MockLogger(report: (String, String) => Unit) extends RodeoLogger {
     override def debug(message: String): Unit = {
