@@ -15,5 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License. */
 
 public class RodeoArgumentConstants {
+  /**
+   * Defines the name of the RodeoArgument API factory for making RodeoArgument APIs.
+   */
   public final static String NAME = "ArgumentRegistrar";
 }
