@@ -16,9 +16,18 @@ limitations under the License. */
 
 import java.lang.Runtime.Version;
 
+/**
+ * RodeoEnvironment is used for holding constants and, in the future, other things that may be
+ * needed for the handling and management of the component environment.
+ */
 public class RodeoEnvironment {
-
-    private static final Version _currentVersion = Version.parse("1.0.0.1");;
+    private RodeoEnvironment() { }
+    private static final Version _currentVersion = Version.parse("1.0.0.1");
+ 
+    /**
+     * Returns the current version of the component environment.
+     * @return The current component environment
+     */
     public static Version currentVersion() {
         return _currentVersion;
     }

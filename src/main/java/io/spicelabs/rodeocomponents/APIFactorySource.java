@@ -16,6 +16,19 @@ limitations under the License. */
 
 import java.util.Optional;
 
+/**
+ * APIFactorySource is an interface that defines how components will import factories from goat rodeo.
+ */
 public interface APIFactorySource {
-    public <T extends API> Optional<APIFactory<T>> getAPIFactory(String name, RodeoComponent subscriber, Class<T> factoryType);
+    /**
+     * Attempt to import an APIFactory.
+     * @param T The type of the requested API
+     * @param name The name of the API. This name should be available as a constant from the API author.
+     * @param subscriber The component which is importing the factory
+     * @param apiType The type of the API which is being requested.
+     * @return An optional type of the requested APIFactory
+     * <p>Example - Importing an API factory
+     * @code Optional<APIFactory<RodeoLogger>> loggerFactoryOpt = factorySource.getAPIFactory<RodeoLogger>(RodeoLoggerConstants.NAME, this, RodeoLogger.class)
+     */
+    public <T extends API> Optional<APIFactory<T>> getAPIFactory(String name, RodeoComponent subscriber, Class<T> apiType);
 }

@@ -14,7 +14,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+/**
+ * Defines an interface for reporting information about a component.
+ */
 public interface RodeoIdentity {
+  /**
+   * Returns the name of the component. While it is possible to provide a name which is "unusual" by containing whitespace
+   * or emoji or other unusual characters, this should be avoided as it will make some routine tasks for the component
+   * onerous at best. Components with conflicting names will be discarded.
+   * @return the name of the component.
+   */
   String name();
+  /**
+   * Returns the name of the publisher of the component. This will be used for clarifying the origin of the component.
+   */
   String publisher();
 }
