@@ -14,6 +14,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+/**
+ * RodeoComponent is an interface which inherits from {@link io.spicelabs.rodeocomponents.RodeoComponentv0}. The interface
+ * RodeoComponent will be the most recent version of the component management. Components should avoid inheriting from
+ * specific versions of the interface if at all possible.
+ */
 public interface RodeoComponent extends RodeoComponentv0 {
   
 }
