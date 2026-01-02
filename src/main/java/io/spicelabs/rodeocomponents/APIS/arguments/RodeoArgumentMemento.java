@@ -14,4 +14,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+/**
+ * The RodeoArgumentMemento interface is used by components to hold intermediate information for processing arguments.
+ * A component may create an object that implements this interface which holds data which is used for configuration of the
+ * component. It makes no difference to goat rodeo how the component uses its memento. Goat rodeo will, however, honor changes in the
+ * actual memento instance rather than assuming that the same one is used across all calls. This allows the component to adopt an
+ * approach where the memento is a single mutable object that changes in its contents or it can adopt an approach where the memento
+ * is an immutable object that is replaced with any change to it.
+ */
 public interface RodeoArgumentMemento { }

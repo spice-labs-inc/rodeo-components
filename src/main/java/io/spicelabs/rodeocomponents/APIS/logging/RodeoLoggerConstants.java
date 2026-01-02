@@ -15,5 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License. */
 
 public class RodeoLoggerConstants {
+  /**
+   * Defines the name of the logging API factory for making logging APIs.
+   */
   public static final String NAME = "RodeoLogger";
 }

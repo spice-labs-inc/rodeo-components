@@ -16,6 +16,20 @@ limitations under the License. */
 
 import io.spicelabs.rodeocomponents.API;
 
+/**
+ * The RodeoArgumentRegistrar is the main API used for consuming arguments passed into goat rodeo.
+ * <p>
+ * Arguments will be seen in the form <code>--component &lt;component-name&gt; parameter+</code>. For example,
+ * if your component is named <code>splunge</code> an argument of the form <code>--component splunge cream-cheese</code>
+ * will available to <code>splunge</code> via its {@link io.spicelabs.rodeocomponents.APIS.arguments.RodeoArgumentListener}.
+ * <p>
+ * In order to receive arguments, a component needs create a <code>RodeoArgumentRegistrar</code> API via a factory imported
+ * from an instance of {@link io.spicelabs.rodeocomponents.APIFactorySource}.
+ */
 public interface RodeoArgumentRegistrar extends API {
+    /**
+     * Register a listener for processing command line arguments.
+     * @param listener an argument listener
+     */
     void register(RodeoArgumentListener listener);
 }
