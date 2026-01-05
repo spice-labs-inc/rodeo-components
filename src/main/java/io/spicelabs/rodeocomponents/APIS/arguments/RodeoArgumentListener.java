@@ -26,7 +26,7 @@ import java.util.List;
  * <p>
  * <ul>
  * <li>Goat rodeo will call {@code begin} and the component will return a {@link io.spicelabs.rodeocomponents.APIS.arguments.RodeoArgumentMemento}.</li>
- * <li>Goat rodeo will call {@code receiveArgument} for each instance of {@code--component name} and the component will return a {@link io.spicelabs.rodeocomponents.APIS.arguments.RodeoArgumentResult}.</li>
+ * <li>Goat rodeo will call {@code receiveArgument} for each instance of {@code --component name} and the component will return a {@link io.spicelabs.rodeocomponents.APIS.arguments.RodeoArgumentResult}.</li>
  * <li>Goat rodeo will call {@code end} after all the arguments have been handled.
  * </ul>
  * <p>
