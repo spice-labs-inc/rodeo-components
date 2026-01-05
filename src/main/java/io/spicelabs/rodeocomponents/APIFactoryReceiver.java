@@ -21,7 +21,7 @@ limitations under the License. */
 public interface APIFactoryReceiver {
   /**
    * Publish an {@link io.spicelabs.rodeocomponents.APIFactory} for use by other components or by goat rodeo.
-   * @param T The type of the API which is being published
+   * @param <T> The type of the API which is being published
    * @param publisher The component which is publishing the factory
    * @param apiName The name of the API. This name should be made available as a public constant.
    * @param apiFactory an {@link io.spicelabs.rodeocomponents.APIFactory} which will be used for building API objects

@@ -36,7 +36,7 @@ import java.lang.Runtime.Version;
 public interface RodeoComponentv0 {
   /**
    * Initialize the component. If the component cannot initialize, it should throw an Exception.
-   * @throws an Exception if the component cannot initialize.
+   * @throws Exception if the component cannot initialize.
    */
   void initialize() throws Exception;
   /**

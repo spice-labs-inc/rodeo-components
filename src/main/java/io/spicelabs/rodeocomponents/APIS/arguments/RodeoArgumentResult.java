@@ -43,7 +43,7 @@ public class RodeoArgumentResult {
     /**
      * Gets the error associated with this result. If {@link #hasError()} returns true, this optional value will contain a valid
      * error string.
-     * @return
+     * @return the error associated with this result
      */
     public Optional<String> getError() {
         return _error;

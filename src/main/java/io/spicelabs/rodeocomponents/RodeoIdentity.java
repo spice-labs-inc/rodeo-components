@@ -22,11 +22,12 @@ public interface RodeoIdentity {
    * Returns the name of the component. While it is possible to provide a name which is "unusual" by containing whitespace
    * or emoji or other unusual characters, this should be avoided as it will make some routine tasks for the component
    * onerous at best. Components with conflicting names will be discarded.
-   * @return the name of the component.
+   * @return the name of the component
    */
   String name();
   /**
    * Returns the name of the publisher of the component. This will be used for clarifying the origin of the component.
+   * @return the publisher of the component
    */
   String publisher();
 }
