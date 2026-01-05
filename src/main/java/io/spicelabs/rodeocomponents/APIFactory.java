@@ -18,7 +18,7 @@ limitations under the License. */
 /**
  * An APIFactory is an object which builds API objects to be used by components. A component which wants to use an API
  * will call an {@link io.spicelabs.rodeocomponents.APIFactorySource} in order to import the factory which owns that API.
- * @param T a type which implements an API
+ * @param <T> a type which implements an API
  */
 public interface APIFactory<T extends API> {
     /**
