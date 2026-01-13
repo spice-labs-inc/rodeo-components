@@ -18,7 +18,7 @@ public interface PurlFactory {
     PurlFactory withType(String type);
     PurlFactory withNamespace(String namespace);
     PurlFactory withName(String name);
-    PurlFactory withVersion(String name);
+    PurlFactory withVersion(String version);
     PurlFactory withSubpath(String subpath);
     PurlFactory withQualifier(String key, String value);
     Purl toPurl();
