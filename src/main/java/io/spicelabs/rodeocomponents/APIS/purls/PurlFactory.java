@@ -1,5 +1,7 @@
 package io.spicelabs.rodeocomponents.APIS.purls;
 
+import java.net.MalformedURLException;
+
 /* Copyright 2026 Stephen Hawley, Spice Labs, Inc. & Contributors
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +20,8 @@ public interface PurlFactory {
     PurlFactory withType(String type);
     PurlFactory withNamespace(String namespace);
     PurlFactory withName(String name);
-    PurlFactory withVersion(String name);
+    PurlFactory withVersion(String version);
     PurlFactory withSubpath(String subpath);
     PurlFactory withQualifier(String key, String value);
-    Purl toPurl();
+    Purl toPurl() throws MalformedURLException;
 }

@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ArtifactHandler<T extends InputStream> {
-  Optional<String> identifyMimeType(T stream, String mimeSoFar);
-  Optional<String> finalMimeAdjustment(T stream, String mimeSoFar);
+  Optional<String> identifyMimeType(T stream, String mimeSoFar, String filename);
+  Optional<String> finalMimeAdjustment(T stream, String mimeSoFar, String filename);
 
   boolean willHandleMime(String mime);
 
