@@ -20,14 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ArtifactHandler<T extends InputStream> {
-  Optional<String> identifyMimeType(T stream, String mimeSoFar, String filename);
-  Optional<String> finalMimeAdjustment(T stream, String mimeSoFar, String filename);
-
-  boolean willHandleMime(String mime);
+  String[] supportedMimeTypes();
 
   ArtifactMemento begin(T stream, Artifact artifact, WorkItem item);
   List<Purl> getPurls(ArtifactMemento memento, Artifact artifact, WorkItem item);
   List<Metadata> getMetadata(ArtifactMemento memento, Artifact artifact, WorkItem item);
   void augment(ArtifactMemento memento, Artifact artifact, WorkItem item, ParentFrame parent, BackendStorage storage);
   void postChildProcessing(ArtifactMemento memento, Optional<List<String>> gitoids, BackendStorage storage);
+  void end(ArtifactMemento memento);
 }
