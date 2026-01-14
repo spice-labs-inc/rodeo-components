@@ -32,3 +32,17 @@ Arguments syntax is currently `--component componentame[,param]+` and argument p
 
 ### Note on Parameter Parsing
 Today, individual arguments for components are comma separated with no white space (although this may change in the future). Components will receive their parameters without the commas and as a `List` of individual `String` objects.
+
+## Package URL Generation
+Some APIs within goat rodeo require package URLs. In order to facilitate this, the `PurlAPI` provides an abstract definition of a package URL and a factory for generating them from the components. The factory provides a fluent interface for with all the `with...` methods return a (possibly) new instance of the factory. After assembling all the elements that are required, call the `toPurl` method to generate a package URL which will contain the elements.
+
+Typical usage can be seen in this example:
+```java
+public Purl makePurl(PurlAPI api, String type, String name, String namespace) throws MalformedURLException
+{
+    return api.newPurlFactory().withType(type).withName(name).with(namespace).toPurl();
+}
+
+```
+
+See [the purl specification](https://github.com/package-url/purl-spec?tab=readme-ov-file) for details on the meanings of the various elements and which are required and optional.

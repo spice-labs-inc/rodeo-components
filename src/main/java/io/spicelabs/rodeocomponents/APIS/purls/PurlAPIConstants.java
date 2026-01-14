@@ -14,6 +14,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+/**
+ * Defines constants for use by the various Purl classes.
+ */
 public class PurlAPIConstants {
-  public static final String NAME = "PurlAPIConstants";
+    /**
+     * Gets the name of the PurlAPI for retrieving the API from an {@see APIFactorySource}
+     */
+    public static final String NAME = "PurlAPI";
 }

@@ -16,6 +16,15 @@ limitations under the License. */
 
 import io.spicelabs.rodeocomponents.API;
 
+/**
+ * This defines the API for making a PackageURL. Calling <code>newPurlFactory</code> will create
+ * a class that can be used for aggregating elements of a PackageURL. See {@link PurlFactory} for details.
+ */
 public interface PurlAPI extends API {
-  PurlFactory newPurlFactory();
+    /**
+     * Creates a new new {@link PurlFactory} for building a PackageURL.
+     * @return  new PurlFactory
+     * @see PurlFactory 
+     */
+    PurlFactory newPurlFactory();
 }
