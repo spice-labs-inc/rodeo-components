@@ -20,6 +20,6 @@ import java.util.Optional;
 public interface MimeIdentifer<T extends InputStream> {
     int preferredHeaderLength();
     boolean canHandleHeader(byte[] header);
-    Optional<String> identifyMimeType(T stream, String mimeSoFar, String filename);
-    Optional<String> finalMimeAdjustment(T stream, String mimeSoFar, String filename);
+    Optional<String> identifyMimeType(T stream, String mimeSoFar);
+    Optional<String> finalMimeAdjustment(T stream, String mimeSoFar);
 }
