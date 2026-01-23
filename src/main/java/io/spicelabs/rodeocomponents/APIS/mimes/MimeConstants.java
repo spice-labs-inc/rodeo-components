@@ -14,7 +14,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+/**
+ * Represents constants associated with the MimeIdentifier
+ */
 public class MimeConstants {
+    /**
+     * The name of the mime identifier API, {@link MimeIdentifierRegistrar}
+     */
     public static final String NAME = "MIMEIdentifiers";
+    /**
+     * If a component can't speficy how many bytes it can use to identify
+     * a header, it should return UNKNOWN_BYTES_NEEDED
+     */
     public static final int UNKNOWN_BYTES_NEEDED = -1;
 }

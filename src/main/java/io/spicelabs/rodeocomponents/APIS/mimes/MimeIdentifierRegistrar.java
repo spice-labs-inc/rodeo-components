@@ -16,8 +16,24 @@ limitations under the License. */
 
 import io.spicelabs.rodeocomponents.API;
 
+/**
+ * This defines the API that is used by components that need to identify mime
+ * types.
+ */
 public interface MimeIdentifierRegistrar extends API {
-    void register(MimeInputStreamIdentifier mimeIdentifier);
-    void register(MimeFileInputStreamIdentifier mimeIdentifier);
-}
+	/**
+	 * Register a mime identifier that operates on {@link java.io.InputStream}
+	 * streams
+	 * 
+	 * @param mimeIdentifier the identifier to register
+	 */
+	void register(MimeInputStreamIdentifier mimeIdentifier);
 
+	/**
+	 * Register a mime identifier that operates on {@link java.io.FileInputStream}
+	 * streams
+	 * 
+	 * @param mimeIdentifier the identifier to register
+	 */
+	void register(MimeFileInputStreamIdentifier mimeIdentifier);
+}

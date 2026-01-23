@@ -16,4 +16,7 @@ limitations under the License. */
 
 import java.io.InputStream;
 
-public interface MimeInputStreamIdentifier extends MimeIdentifer<InputStream> { }
+/**
+ * A specialization of {@link MimeIdentifier} that uses an {@link java.io.InputStream}.
+ */
+public interface MimeInputStreamIdentifier extends MimeIdentifier<InputStream> { }
