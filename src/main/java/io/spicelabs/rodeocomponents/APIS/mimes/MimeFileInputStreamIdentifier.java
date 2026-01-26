@@ -16,4 +16,10 @@ limitations under the License. */
 
 import java.io.FileInputStream;
 
-public interface MimeFileInputStreamIdentifier extends MimeIdentifer<FileInputStream> { }
+/**
+ * Components should implement this interface if they need a {@link java.io.FileInputStream} in order to
+ * identify the mime type. This is primarily needed for types that require seeking in the stream. For performance
+ * reasons, if it is possible to use a plain {@link java.io.InputStream}, components should favor using
+ * {@link MimeInputStreamIdentifier}.
+ */
+public interface MimeFileInputStreamIdentifier extends MimeIdentifier<FileInputStream> { }
