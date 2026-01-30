@@ -22,10 +22,10 @@ import java.util.Optional;
 public interface ArtifactHandler<T extends InputStream> {
   String[] supportedMimeTypes();
 
-  ArtifactMemento begin(T stream, Artifact artifact, WorkItem item);
-  List<Purl> getPurls(ArtifactMemento memento, Artifact artifact, WorkItem item);
-  List<Metadata> getMetadata(ArtifactMemento memento, Artifact artifact, WorkItem item);
-  void augment(ArtifactMemento memento, Artifact artifact, WorkItem item, ParentFrame parent, BackendStorage storage);
+  ArtifactMemento begin(T stream, RodeoArtifact artifact, WorkItem item);
+  List<Purl> getPurls(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item);
+  List<Metadata> getMetadata(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item);
+  void augment(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item, ParentFrame parent, BackendStorage storage);
   void postChildProcessing(ArtifactMemento memento, Optional<List<String>> gitoids, BackendStorage storage);
   void end(ArtifactMemento memento);
 }
