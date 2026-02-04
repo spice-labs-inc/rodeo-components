@@ -15,14 +15,15 @@ See the License for the specific language governing permissions and
 limitations under the License. */
 
 import io.spicelabs.rodeocomponents.APIS.purls.Purl;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
-public interface ArtifactHandler<T extends InputStream> {
-  String[] supportedMimeTypes();
-
-  ArtifactMemento begin(T stream, RodeoArtifact artifact, WorkItem item);
+public interface ArtifactHandler {
+  boolean requiresFile();
+  ArtifactMemento begin(InputStream stream, RodeoArtifact artifact, WorkItem item);
+  ArtifactMemento begin(FileInputStream stream, RodeoArtifact artifact, WorkItem item);
   List<Purl> getPurls(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item);
   List<Metadata> getMetadata(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item);
   void augment(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item, ParentFrame parent, BackendStorage storage);
