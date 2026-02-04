@@ -17,6 +17,5 @@ limitations under the License. */
 import io.spicelabs.rodeocomponents.API;
 
 public interface ArtifactHandlerRegistrar extends API {
-    void register(FileArtifactHandler handler);
-    void register(InputStreamArtifactHandler handler);
+    void registerProcessFilter(RodeoProcessFilter filter);
 }
