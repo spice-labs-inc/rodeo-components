@@ -16,22 +16,23 @@ limitations under the License. */
 
 import io.spicelabs.rodeocomponents.APIS.purls.Purl;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
 public interface WorkItem {
-    String identifier();
-    Set<StringPair> connections();
-    WorkItem withConnection(String edgeType, String id);
+    String getIdentifier();
+    Set<StringPair> getConnections();
+    WorkItem withNewConnection(String edgeType, String id);
     WorkItem merge(WorkItem other);
-    byte[] md5();
+    byte[] getMd5();
     boolean compareMd5(WorkItem other);
-    boolean isRoot();
+    boolean isRootWorkItem();
     List<StringPair> referencedFromAliasOrBuildOrContained();
     WorkItem createOrUpdateInStorage(BackendStorage store, Function<WorkItem, String> context);
-    WorkItem updateBackReferences(BackendStorage store, ParentFrame frame);
+    WorkItem updateTheBackReferences(BackendStorage store, ParentFrame frame);
     List<String> containedGitoids();
     WorkItem enhanceWithPurls(List<Purl> purls);
-    WorkItem enhanceWithMetadata(Optional<String> parent, Set<Metadata> extra, List<String> filenames, List<String> mimeTypes);
+    WorkItem enhanceWithMetadata(Optional<String> parent, Map<String, Set<StringPairOptional>> extra, List<String> filenames, List<String> mimeTypes);
 }
