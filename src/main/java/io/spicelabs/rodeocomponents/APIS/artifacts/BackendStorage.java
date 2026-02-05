@@ -19,7 +19,7 @@ import java.util.Set;
 
 public interface BackendStorage {
     void addPurl(Purl purl);
-    Set<String> purls();
-    Set<String> keys();
-    boolean contains(String identifier);
+    Set<String> getPurls();
+    Set<String> getKeys();
+    boolean containsID(String identifier);
 }
