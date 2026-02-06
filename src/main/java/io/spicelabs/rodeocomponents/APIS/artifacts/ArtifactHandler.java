@@ -22,11 +22,11 @@ import java.util.Optional;
 
 public interface ArtifactHandler {
   boolean requiresFile();
-  ArtifactMemento begin(InputStream stream, RodeoArtifact artifact, WorkItem item);
-  ArtifactMemento begin(FileInputStream stream, RodeoArtifact artifact, WorkItem item);
-  List<Purl> getPurls(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item);
-  List<Metadata> getMetadata(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item);
-  void augment(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item, ParentFrame parent, BackendStorage storage);
-  void postChildProcessing(ArtifactMemento memento, Optional<List<String>> gitoids, BackendStorage storage);
+  ArtifactMemento begin(InputStream stream, RodeoArtifact artifact, WorkItem item, RodeoItemMarker marker);
+  ArtifactMemento begin(FileInputStream stream, RodeoArtifact artifact, WorkItem item, RodeoItemMarker marker);
+  List<Purl> getPurls(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item, RodeoItemMarker marker);
+  List<Metadata> getMetadata(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item, RodeoItemMarker marker);
+  WorkItem augment(ArtifactMemento memento, RodeoArtifact artifact, WorkItem item, ParentFrame parent, BackendStorage storage, RodeoItemMarker marker);
+  void postChildProcessing(ArtifactMemento memento, Optional<List<String>> gitoids, BackendStorage storage, RodeoItemMarker marker);
   void end(ArtifactMemento memento);
 }
