@@ -14,4 +14,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+/**
+ * The ArtifactMemento is an object that is provided by components during artifact processing.
+ * The component will provide an instance of an object that implements ArtifactMemento when returning from a
+ * call to {@link ArtifactHandler#begin(InputStream, RodeoArtifact, WorkItem, RodeoItemMarker)}
+ */
 public interface ArtifactMemento { }

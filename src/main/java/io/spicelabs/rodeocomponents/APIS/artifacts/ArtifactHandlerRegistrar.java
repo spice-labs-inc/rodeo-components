@@ -16,6 +16,14 @@ limitations under the License. */
 
 import io.spicelabs.rodeocomponents.API;
 
+/**
+ * This is the main API that is used to process artifacts. The starting point is a {@link RodeoProcessFilter} which
+ * will examine artifacts and provide a handler for the artifacts.
+ */
 public interface ArtifactHandlerRegistrar extends API {
+    /**
+     * Register a filter that will be called to filter artifacts and provide a handler for them.
+     * @param filter A filter for artifacts
+     */
     void registerProcessFilter(RodeoProcessFilter filter);
 }
