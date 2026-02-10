@@ -14,11 +14,38 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+/**
+ * Represents an artifact that is being processed.
+ */
 public interface RodeoArtifact {
+    /**
+     * Returns the nominal path of the artifact. <B>Do not depend on this being a file system path</B>
+     * @return the nominal path of the artifact
+     */
     String getPath();
+    /**
+     * Returns the size of the artifact in bytes.
+     * @return the size of the artifact in bytes
+     */
     long getSize();
+    /**
+     * Returns the MIME type of the artifact
+     * @return the MIME type of the artifact
+     */
     String getMimeType();
+    /**
+     * Indicates whether or not the artifact is represented by a real file
+     * @return true if the artifact is a real file, false otherwise
+     */
     boolean getIsRealFile();
+    /**
+     * Returns a unique identifier associated with the artifact
+     * @return a unique identifier associated with the artifact
+     */
     String getUuid();
+    /**
+     * Returns the file name of the artifact
+     * @return the file name of the artifact
+     */
     String getFilenameWithNoPath();
 }

@@ -17,9 +17,29 @@ limitations under the License. */
 import io.spicelabs.rodeocomponents.APIS.purls.Purl;
 import java.util.Set;
 
+/**
+ * Represents backend storage for artifact processing
+ */
 public interface BackendStorage {
+    /**
+     * Add a purl to the storage
+     * @param purl The {@link Purl} to add
+     */
     void addPurl(Purl purl);
+    /**
+     * Get the purls that are associated with the backend storage
+     * @return A set containing the purls
+     */
     Set<String> getPurls();
+    /**
+     * Get the keys that associated with the backend storage
+     * @return a set containing the keys
+     */
     Set<String> getKeys();
+    /**
+     * Determine if the backend storage contains an identifier
+     * @param identifier an identifier to search for
+     * @return true if the identifier is present, false otherwise
+     */
     boolean containsID(String identifier);
 }
