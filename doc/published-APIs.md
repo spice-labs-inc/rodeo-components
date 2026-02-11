@@ -124,3 +124,42 @@ final class PSIdentifier extends MimeInputStreamIdentifier {
     }
 }
 ```
+
+## Artifact Handling
+
+In building components for Goat Rodeo, one of the major APIs is that for interpreting and processing artifacts. An artifact is an item of data encountered by Goat Rodeo and is represented by the interface `RodeoArtifact`. You can consider it to be a file, but that's a simplification because artifacts may be an element within a container which may be within another container. **NOTE:** the class that implements `RodeoArtifact` is provided by Goat Rodeo. A component should *never* implement this interface. Similarly, the type `WorkItem` is implemented and owned by Goat Rodeo and should not be implemented by a component.
+
+To process an artifact, you first register a filter which is a class which implemented the interface `RodeoProcessFilter`. This filter gets passed a `Map<String, RodeoArtifact>` which is a mapping of artifact names onto a list of `RodeoArtifact`. The filter will return back a list of the elements that the component intend to process. The element is a three element record. The first element is a `String`, which is the name from the Map. The second element is the `RodeoArtifact` that is associated with the name. The third element is a `RodeoProcessItems` which will dictate how the artifact will be processed. `RodeoProcessItems` is an interface that contains methods to associate a name with the process, to indicate how many artifacts it will process, and to get list of pairs of `RodeoArtifact` and `RodeoItemMarker` objects. This list of pairs is associated with a component-defined `ArtifactHandler` which will process `RodeoArtifacts`. The `RodeoItemMarker` is a component-defined type to associate with the artifact. For example, if you have a set of artifacts that are related but contain different information that need to be assembled together you would use a class implementing `RodeoItemMarker` and differentiate between the artifacts using the marker. In other words, if you are enabling the processing of, say, code blobs that include documentation and a manifest, you could create a class like this:
+```java
+public class MyMarker extends RodeoItemMarker {
+    private int _value;
+    private MyMarker(int value) {
+        _value = value;
+    }
+    public static final RodeoItemMarker CODE_BLOB = MyMarker(0);
+    public static final RodeoItemMarker DOC = MyMarker(1);
+    public static final RodeoItemMarker MANIFEST = MyMarker(2);
+}
+```
+
+The class which implements `ArtifactHandler` is the most important in that it does all the actual processing. The first method that will be called is `requiresFile` which will ask the component if it needs a `FileInputStream` instead of a more generic `InputStream`. The reason to have a `FileInputStream` is in case the component needs to seek around the stream. If you were processing PDF files, you would most assuredly want that. Be aware that while many of the artifacts will be files, this is not uniformly the case and if you don't need the extra capability of a `FileInputStream`, a component should return `false`.
+
+The next method to be called will be be `begin`. There are two flavors, one with an `InputStream` and one with `FileInputStream`. Goat Rodeo will call one depending on the return value of `requiresFile`. **NOTE:** the `FileInputStream` may be a temporary file that has no relation to the `InputStream` from which it was created other than having the same contents. Begin gives the component an opportunity to build state that it may need later. For managing state, a component has two choices: to embed state within the `ArtifactHandler` or to use the return value which is an instance a class that implements `ArtifactMemento`. Like all the other methods exposed by Goat Rodeo, you should never return `null`. If you don't plan on depending on `ArtifactMemento` implement it as a singleton, which you can return from `begin` and then ignore in subsequent calls:
+
+```java
+public class MyMemento extends ArtifactMemento {
+    private MyMemento() { }
+    public static final ArtifactMemento SINGLETON = MyMemento();
+}
+```
+
+The next method to get called is `getPurls` which will return a list of Package URLs to associate with this artifact. In order to make a Purl, use the PurlAPI (see above). `getPurls` will get passed the memento returned from `begin`, the artifact being processed, the `WorkItem` associated with the artifact, and the `RodeoMarker` that the component associated with the artifact when it provided the handler. The Package URLs will get installed in the `WorkItem` for the component upon return.
+
+Next, Goat Rodeo will call `getMetadata` to return metadata that will be installed into the `WorkItem` associated with with artifact upon return. The artifact handler API provides. The metadata class is constructed with a tag and `String` that represent metadata. The tags define typical metadata that a component might want to associate with the artifact. A component should try to define what it can. For metadata types not defined by the `MetadataTag`, a component can add them in the next step.
+
+Goat Rodeo will then call the `augment` which is an opportunity to add information to the `WorkItem`. All of the methods on the `WorkItem` interface that change the `WorkItem` in some way will return a new `WorkItem` that reflects the changes. If you make a change to the `WorkItem`, but don't return the new instance and instead return the instance passed to you, that is tantamount to returning a `WorkItem` with no changes. Augment is an opportunity to do other things, such as make connections between `WorkItem` objects.
+
+The next call is `postChildProcessing` which is an opportunity to do any final work after any children of this artifact have been processed.
+
+Finally, Goat Rodeo will call `end` which is the opportunity to clean up any resources that may have been acquired during this process. It is not necessary to close the `FileInputStream` or the `InputStream`. Goat Rodeo will manage those resources for you.
+
