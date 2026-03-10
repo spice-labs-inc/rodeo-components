@@ -1,6 +1,7 @@
 package io.spicelabs.rodeocomponents.APIS.purls;
 
 import java.net.MalformedURLException;
+import java.util.Optional;
 
 /* Copyright 2026 Stephen Hawley, Spice Labs, Inc. & Contributors
 
@@ -73,4 +74,11 @@ public interface PurlFactory {
      * @throws MalformedURLException if the factory is incomplete or contains invalid elements.
      */
     Purl toPurl() throws MalformedURLException;
+
+    /**
+     * Generates a Purl from a String
+     * @param purl a String representation of a Purl
+     * @return the resulting Purl object. Will contain a value if the Purl was valid, empty otherwise.
+     */
+    Optional<Purl> fromString(String purl);
 }
