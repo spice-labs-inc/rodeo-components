@@ -14,6 +14,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
+import java.io.InputStream;
+import java.util.function.Function;
+
 /**
  * Represents an artifact that is being processed.
  */
@@ -48,4 +51,12 @@ public interface RodeoArtifact {
      * @return the file name of the artifact
      */
     String getFilenameWithNoPath();
+
+    /**
+     * Executes a function with an InputStream containing the artifact
+     * @param <T> The return type of the function
+     * @param func The function to execute
+     * @return The return value of the function
+     */
+    <T> T withInputStream(Function<InputStream, T> func);
 }
