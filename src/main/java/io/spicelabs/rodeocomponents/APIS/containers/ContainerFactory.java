@@ -17,10 +17,42 @@ package io.spicelabs.rodeocomponents.APIS.containers;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+/**
+ * Defines how a type that makes ContainerHandler objects will behave. This is used
+ * for extracting elements from a container such as a tar file.
+ */
 public interface ContainerFactory {
+    /**
+     * Gets the name of the handler
+     * @return the name of the handler
+     */
     String getName();
+    /**
+     * Indicates if and how the factory will respond to a container with the give mime type
+     * @param mimeType the mime type of the container
+     * @return return HandlerResult.NO if the factory can't handle the mime type, HandlerResult.WITH_INPUT_STREAM if
+     * the handler requires an InputStream as input, otherwise HandlerResult.WITH_FILE_INPUT_STREAM if the handler
+     * requires a FileInputStream. <B>Note</B>: working with InputStream objects will be more efficient.
+     */
     HandlerResult canHandle(String mimeType);
+    /**
+     * Build a handler for the given mimeType using an InputStream
+     * @param mimeType the mime type of the container
+     * @param stm the stream for the container
+     * @return a new ContainerHandler for the container
+     */
     ContainerHandler buildHandler(String mimeType, InputStream stm);
+    /**
+     * Build a handler for the given mimeType using a FileInputStream
+     * @param mimeType the mime type of the container
+     * @param stm the stream for the container
+     * @return a new ContainerHandler for the container
+     */
     ContainerHandler buildHandler(String mimeType, FileInputStream stm);
+    /**
+     * Called when the container has been fully processed. This is an opportunity for the handler to clean up
+     * any resources.
+     * @param handler the handler that processed the container.
+     */
     void onContainerProcessed(ContainerHandler handler);
 }

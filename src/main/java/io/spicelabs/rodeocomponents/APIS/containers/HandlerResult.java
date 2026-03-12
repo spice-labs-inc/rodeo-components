@@ -32,5 +32,5 @@ public enum HandlerResult {
      * Indicated that the ContainerFactory will handle the candidate container and can
      * work with a FileInputStream.
      */
-    WITH_FILE_INPUTSTREAM
+    WITH_FILE_INPUT_STREAM
 }
