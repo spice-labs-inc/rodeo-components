@@ -16,6 +16,7 @@ package io.spicelabs.rodeocomponents.APIS.containers;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.File;
 
 /**
  * Defines how a type that makes ContainerHandler objects will behave. This is used
@@ -49,6 +50,13 @@ public interface ContainerFactory {
      * @return a new ContainerHandler for the container
      */
     ContainerHandler buildHandler(String mimeType, FileInputStream stm);
+    /**
+     * Build a handler for the given mimeType using a File
+     * @param mimeType the mime type of the container
+     * @param file the file for the container
+     * @return a new ContainerHandler for the container
+     */
+    ContainerHandler buildHandler(String mimeType, File file);
     /**
      * Called when the container has been fully processed. This is an opportunity for the handler to clean up
      * any resources.
