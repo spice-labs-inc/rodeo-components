@@ -15,6 +15,7 @@ limitations under the License. */
 package io.spicelabs.rodeocomponents.APIS.containers;
 
 import io.spicelabs.rodeocomponents.API;
+import java.util.List;
 
 /**
  * Provides an API for registering a ContainerFactory.
@@ -23,7 +24,16 @@ public interface ContainerAPI extends API {
     /**
      * Register a ContainerFactory that will be used for building container handlers
      * @param factory the factory to be registered
+     */
+    void registerContainerFactory(ContainerFactory factory);
+    /**
+     * Given a name of a ContainerFactory, remove it from the list of containerFactories
      * @param name the name of the factory
      */
-    void registerContainerFactory(ContainerFactory factory, String name);
+    void removeContainerFactory(String name);
+    /**
+     * Get the list of all containerFactories
+     * @return a list containing the names of all the container factories
+     */
+    List<String> getContainerFactoryNames();
 }
