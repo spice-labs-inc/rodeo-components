@@ -14,9 +14,10 @@ limitations under the License. */
 
 package io.spicelabs.rodeocomponents.APIS.containers;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Defines how a type that makes ContainerHandler objects will behave. This is used
@@ -40,23 +41,26 @@ public interface ContainerFactory {
      * Build a handler for the given mimeType using an InputStream
      * @param mimeType the mime type of the container
      * @param stm the stream for the container
+     * @param tempDirectory a path to a directory for creating temporary files
      * @return a new ContainerHandler for the container
      */
-    ContainerHandler buildHandler(String mimeType, InputStream stm);
+    ContainerHandler buildHandler(String mimeType, InputStream stm, Path tempDirectory);
     /**
      * Build a handler for the given mimeType using a FileInputStream
      * @param mimeType the mime type of the container
      * @param stm the stream for the container
+     * @param tempDirectory a path to a directory for creating temporary files
      * @return a new ContainerHandler for the container
      */
-    ContainerHandler buildHandler(String mimeType, FileInputStream stm);
+    ContainerHandler buildHandler(String mimeType, FileInputStream stm, Path tempDirectory);
     /**
      * Build a handler for the given mimeType using a File
      * @param mimeType the mime type of the container
      * @param file the file for the container
+     * @param tempDirectory a path to a directory for creating temporary files
      * @return a new ContainerHandler for the container
      */
-    ContainerHandler buildHandler(String mimeType, File file);
+    ContainerHandler buildHandler(String mimeType, File file, Path tempDirectory);
     /**
      * Called when the container has been fully processed. This is an opportunity for the handler to clean up
      * any resources.
