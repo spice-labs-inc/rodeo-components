@@ -18,7 +18,7 @@ package io.spicelabs.rodeocomponents.APIS.containers;
  * This is the main API that is used to handle containers. The starting point is a {@link ContainerFactory} which
  * will examine the MIME type of a stream and (possibly) expand it into new artifacts.
  */
-class ContainerConstants {
+public class ContainerConstants {
     /**
      * Defines the name of the ContainerFactoryRegistrar
      */
