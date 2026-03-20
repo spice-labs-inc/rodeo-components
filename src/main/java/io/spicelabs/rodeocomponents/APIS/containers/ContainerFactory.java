@@ -16,7 +16,6 @@ package io.spicelabs.rodeocomponents.APIS.containers;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.nio.file.Path;
 
 /**
@@ -44,7 +43,7 @@ public interface ContainerFactory {
      * @param tempDirectory a path to a directory for creating temporary files
      * @return a new ContainerHandler for the container
      */
-    ContainerHandler buildHandler(String mimeType, InputStream stm, Path tempDirectory);
+    ContainerHandler buildHandler(String mimeType, StreamProvider provider, Path tempDirectory);
     /**
      * Build a handler for the given mimeType using a FileInputStream
      * @param mimeType the mime type of the container
