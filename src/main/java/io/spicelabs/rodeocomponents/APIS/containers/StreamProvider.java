@@ -26,7 +26,8 @@ public interface StreamProvider {
      * can be called multiple times and the operator is guaranteed to receive the same data each time (provided
      * it hasn't been modified by outside means), but it is not guaranteed to receive the same stream object.
      * This method is useful for containers that consume a stream and may need to read from the start of the
-     * stream multiple times.
+     * stream multiple times. <B>Note</B>: The InputStream passed to the operator will be invalid after the
+     * operator has exited.
      * @param <T> client defined type to serve as a result from reading from the stream
      * @param operator a function to operate on the stream
      * @return a client defined return value

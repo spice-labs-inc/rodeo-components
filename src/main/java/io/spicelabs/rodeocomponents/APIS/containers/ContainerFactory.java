@@ -39,7 +39,7 @@ public interface ContainerFactory {
     /**
      * Build a handler for the given mimeType using an InputStream
      * @param mimeType the mime type of the container
-     * @param stm the stream for the container
+     * @param provider the stream provider for the container
      * @param tempDirectory a path to a directory for creating temporary files
      * @return a new ContainerHandler for the container
      */
