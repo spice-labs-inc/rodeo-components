@@ -21,12 +21,12 @@ import java.io.File;
  * returns itself. This is meant as a place holder used by EmptyContainerHandler. In practice
  * it should never be used out of that context.
  */
-public class EmptyContainerReceiver implements ContainerReceiver {
+public class SinkContainerReceiver implements ContainerReceiver {
     /**
-     * Gets a singleton of the empty container receiver.
+     * Gets a singleton of the container receiver sink.
      */
-    public static final ContainerReceiver empty = new EmptyContainerReceiver();
-    private EmptyContainerReceiver() {
+    public static final ContainerReceiver sink = new SinkContainerReceiver();
+    private SinkContainerReceiver() {
 
     }
 

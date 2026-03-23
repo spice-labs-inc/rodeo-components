@@ -17,8 +17,8 @@ package io.spicelabs.rodeocomponents.APIS.containers;
 /**
  * An implementation of ContainerHandler that does nothing. Instead of returning null from
  * the ContainerFactory methods that build factories that are unused, you can return an
- * EmptyContainerHandler which will do nothing. Its getItems() method returns Stream.empty()
- * and its onItemProcessed method does nothing.
+ * EmptyContainerHandler which will do nothing. Its produceItems() method returns the singleton
+ * instance of the SinkContainerReceiver and its onItemProcessed method does nothing.
  */
 public class EmptyContainerHandler implements ContainerHandler {
     /**
@@ -30,7 +30,7 @@ public class EmptyContainerHandler implements ContainerHandler {
 
     @Override
     public ContainerReceiver produceItems(ContainerReceiver receiver) {
-        return receiver;
+        return SinkContainerReceiver.sink;
     }
 
     @Override
