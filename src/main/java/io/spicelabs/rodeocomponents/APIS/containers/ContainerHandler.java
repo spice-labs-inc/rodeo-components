@@ -14,19 +14,17 @@ limitations under the License. */
 
 package io.spicelabs.rodeocomponents.APIS.containers;
 
-import java.util.stream.Stream;
-
 /**
  * Represents a class that will be called to handle the contents of a container.
  */
 public interface ContainerHandler {
     /**
-     * Get the items within the container. <B>Note</B>: when creating the stream, do not
-     * use a parallel stream as there will be contention over the initial InputStream from
-     * which the items are being extracted.
-     * @return a Stream of items.
+     * Called when a container should produce its items. The items will be provided to the
+     * given receiver.
+     * @param receiver a receiver for the items
+     * @return the final receiver after producing items
      */
-    Stream<ContainerItem> getItems();
+    ContainerReceiver produceItems(ContainerReceiver receiver);
     /**
      * Called when an item has been processed. This gives a ContainerHandler the opportunity
      * to free fresources, if needed.

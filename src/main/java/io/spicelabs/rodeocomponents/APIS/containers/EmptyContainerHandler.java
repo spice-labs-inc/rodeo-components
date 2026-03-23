@@ -14,8 +14,6 @@ limitations under the License. */
 
 package io.spicelabs.rodeocomponents.APIS.containers;
 
-import java.util.stream.Stream;
-
 /**
  * An implementation of ContainerHandler that does nothing. Instead of returning null from
  * the ContainerFactory methods that build factories that are unused, you can return an
@@ -29,9 +27,10 @@ public class EmptyContainerHandler implements ContainerHandler {
     public static final ContainerHandler empty = new EmptyContainerHandler();
 
     private EmptyContainerHandler() { }
+
     @Override
-    public Stream<ContainerItem> getItems() {
-        return Stream.empty();
+    public ContainerReceiver produceItems(ContainerReceiver receiver) {
+        return receiver;
     }
 
     @Override
