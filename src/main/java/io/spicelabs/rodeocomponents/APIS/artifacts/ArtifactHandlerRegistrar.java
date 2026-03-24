@@ -14,7 +14,6 @@ limitations under the License. */
 package io.spicelabs.rodeocomponents.APIS.artifacts;
 
 import io.spicelabs.rodeocomponents.API;
-import java.util.List;
 
 /**
  * This is the main API that is used to process artifacts. The starting point is a {@link RodeoProcessFilter} which
@@ -26,14 +25,4 @@ public interface ArtifactHandlerRegistrar extends API {
      * @param filter A filter for artifacts
      */
     void registerProcessFilter(RodeoProcessFilter filter);
-    /**
-     * Removes an existing process filter by name
-     * @param name the name of the process filter to remove
-     */
-    void removeProcessFilter(String name);
-    /**
-     * Gets a list of the names of all process filters
-     * @return
-     */
-    List<String> getProcessFilterNames();
 }
