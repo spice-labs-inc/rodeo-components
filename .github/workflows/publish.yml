@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout with LFS
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           lfs: true
 
@@ -60,16 +60,9 @@ jobs:
           PUBLISH_TARGET: github
           PGP_SECRET: ${{ secrets.MAVEN_CENTRAL_GPG_PRIVATE_KEY }}
           PGP_PASSPHRASE: ${{ secrets.MAVEN_CENTRAL_GPG_PASSPHRASE }}
-          # at present this value is not important as long as it isn't
-          # "maven-central"
           PUBLISHING_DESTINATION: "github-packages"
 
       - name: Publish signed Jars to Maven Central
-        # run a compound command:
-        #  publishSigned should build the project to local staging and
-        #    sign it
-        #  sonaRelease should upload to to maven central and
-        #    auto-release it
         run:
           SBT_OPTS="-Xmx8G -Duser.timezone=GMT" sbt "set ThisBuild / version := \"${{ env.projectVersion }}\"" "+publishSigned ; sonaRelease"
         env:
@@ -77,7 +70,6 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           PGP_SECRET: ${{ secrets.MAVEN_CENTRAL_GPG_PRIVATE_KEY }}
           PGP_PASSPHRASE: ${{ secrets.MAVEN_CENTRAL_GPG_PASSPHRASE }}
-          # this will publish to maven central
           PUBLISHING_DESTINATION: "maven-central"
 
       - name: Index and Upload ADG
